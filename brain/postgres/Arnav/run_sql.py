@@ -43,10 +43,10 @@ def run_second_dml():
             conn.commit()
     print("downstream table refreshed")
 
-def view_table(table_name="project_two.arnav", limit=10):
+def view_table(table_name, limit=5, order_by="accuracy"):
     with psycopg2.connect(DATABASE_URL) as conn:
         with conn.cursor() as cur:
-            cur.execute(f"SELECT * FROM {table_name} ORDER BY accuracy DESC LIMIT %s;", (limit,))
+            cur.execute(f"SELECT * FROM {table_name} ORDER BY {order_by} DESC LIMIT %s;", (limit,))
             rows = cur.fetchall()
             col_names = [desc[0] for desc in cur.description]
 
@@ -62,4 +62,4 @@ if __name__ == "__main__":
     run_second_ddl()
     run_second_dml()
     view_table("project_two.arnav")
-    view_table("project_two.arnav_best_models")
+    view_table("project_two.arnav_best_models", order_by="best_accuracy")
