@@ -1,6 +1,6 @@
-CREATE SCHEMA project_two;
+CREATE SCHEMA IF NOT EXISTS project_two;
 
-CREATE TABLE project_two.Arnav (
+CREATE TABLE IF NOT EXISTS project_two.Arnav (
     exp_id UUID PRIMARY KEY,
     exp_name TEXT NOT NULL,
     member_name TEXT NOT NULL,

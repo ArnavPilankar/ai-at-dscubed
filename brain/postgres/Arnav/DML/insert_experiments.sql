@@ -1,5 +1,5 @@
 
-CREATE EXTENSION "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 INSERT INTO project_two.arnav (
     exp_id,
@@ -19,6 +19,7 @@ VALUES(
     'TFBertForMaskedLM',
     '{"model": "bert-base-uncased"}',
     0.79,
+    'predicting masked words'
     ),
     (
     uuid_generate_v4(),
@@ -26,7 +27,7 @@ VALUES(
     'Arnav',
     'gtsrb',
     'CNN',
-    '{"epochs": 10, "optimiser": "adam", "loss": "categorical_crossentropy"}'
+    '{"epochs": 10, "optimiser": "adam", "loss": "categorical_crossentropy"}',
     0.81,
-    "identification of traffic signs"
+    'identification of traffic signs'
     );

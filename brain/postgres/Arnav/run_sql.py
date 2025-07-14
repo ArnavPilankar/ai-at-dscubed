@@ -27,6 +27,21 @@ def run_dml():
             conn.commit()
     print("DML executed successfully.")
 
+def run_second_ddl():
+    sql = read_sql_file("DDL/create_best_models_table.sql")
+    with psycopg2.connect(DATABASE_URL) as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql)
+            conn.commit()
+    print("downstream table created")
+
+def run_second_dml():
+    sql = read_sql_file("DML/refresh_best_models.sql")
+    with psycopg2.connect(DATABASE_URL) as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql)
+            conn.commit()
+    print("downstream table refreshed")
 
 def view_table(table_name="project_two.arnav", limit=10):
     with psycopg2.connect(DATABASE_URL) as conn:
@@ -44,4 +59,7 @@ def view_table(table_name="project_two.arnav", limit=10):
 if __name__ == "__main__":
     run_ddl()
     run_dml()
-    view_table()
+    run_second_ddl()
+    run_second_dml()
+    view_table("project_two.arnav")
+    view_table("project_two.arnav_best_models")
